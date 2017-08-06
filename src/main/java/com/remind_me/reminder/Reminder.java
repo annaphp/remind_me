@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.remind_me.user.User;
 
 @Entity
 public class Reminder {
@@ -12,16 +15,18 @@ public class Reminder {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@ManyToOne
+	private User user;
+	
 	private String title;
 	private String content;
-	private LocalDate dateCreated;
 	private LocalDate dueDate;
 	
 	
-	public Reminder(String title, String content, LocalDate dateCreated, LocalDate dueDate) {
+	public Reminder(String title, String content, LocalDate dueDate) {
 		this.title = title;
 		this.content = content;
-		this.dateCreated = dateCreated;
 		this.dueDate = dueDate;
 	}
 	
@@ -48,16 +53,6 @@ public class Reminder {
 	}
 
 
-	public LocalDate getDateCreated() {
-		return dateCreated;
-	}
-
-
-	public void setDateCreated(LocalDate dateCreated) {
-		this.dateCreated = dateCreated;
-	}
-
-
 	public LocalDate getDueDate() {
 		return dueDate;
 	}
@@ -65,6 +60,22 @@ public class Reminder {
 
 	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 		
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.remind_me.user.User;
+
 @Service
 public class ReminderService {
 	
@@ -24,7 +26,11 @@ public class ReminderService {
 	}
 	
 	public void delete(Reminder reminder){
-		delete(reminder);
+		repository.delete(reminder);
+	}
+	
+	public void findByUser(User user){
+		repository.findByUser(user);
 	}
 }
 
