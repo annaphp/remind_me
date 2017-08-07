@@ -21,10 +21,6 @@ public class User {
 	private String password;
 	private String email;
 	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	private Set<Reminder> reminders = new HashSet<>();
-	
-	
 	
 	public User(String username, String password, String email) {
 		this.username = username;
@@ -34,15 +30,6 @@ public class User {
 	
 	public User(){}
 	
-	public Set<Reminder> getReminders() {
-		return reminders;
-	}
-
-	public void setReminders(Set<Reminder> reminders) {
-		this.reminders = reminders;
-	}
-
-
 
 	public Long getId() {
 		return id;
@@ -107,10 +94,6 @@ public class User {
 		return true;
 	}
 
-	public void link(Reminder reminder){
-		this.reminders.add(reminder);
-		reminder.setUser(this);
-	}
 	
 	@Override
 	public String toString() {
