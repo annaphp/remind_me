@@ -37,8 +37,8 @@ public class ReminderService {
 		repository.delete(reminder);
 	}
 	
-	public void findByUser(User user){
-		repository.findByUser(user);
+	public List<Reminder> findByUser(User user){
+		return repository.findByUser(user);
 	}
 }
 

@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 
 import com.remind_me.user.User;
 
+
 @Entity
 public class Reminder {
 

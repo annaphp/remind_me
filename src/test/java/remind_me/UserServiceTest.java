@@ -29,8 +29,6 @@ public class UserServiceTest {
 	
 	User user;
 	
-
-
 	@Before
 	public void setup(){
 	    user = new User("John", "1234", "john@gmail.com");	
