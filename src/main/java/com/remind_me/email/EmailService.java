@@ -16,14 +16,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 	
-	@Value("${email}")
-	private String email;
+//	@Value("${email}")
+	//private String email;
 		
-	@Value("${password}")
-	private String password;
+//	@Value("${password}")
+	//private String password;
 
 	@Async
-	public void send(String to, String subject, String text) {
+	public void send(String to, String subject, String text, String email, String password ) {
 		
 		    Properties props = System.getProperties();
 		    props.put("mail.smtp.host", "smtp.gmail.com");
