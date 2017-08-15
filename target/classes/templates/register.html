@@ -1,0 +1,32 @@
+<html layout:decorator="layout/base">
+	<section layout:fragment="content">		
+	
+		<form  class="form-horizontal" th:action="@{/user/register}" th:object="${userToRegister}" method="post">
+		
+			<h3> Please register to create reminders:</h3>
+			<fieldset>
+			
+			<label for="username"  class="control-label" >Username:</label>
+			<input type="text" name="username" class="form-control" th:field="*{username}" ></input>
+			<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger" role="alert"></p>
+			
+			<label for="email"  class="control-label">Email:</label>
+			<input type="email" name="email" class="form-control" th:field="*{email}"></input>
+			<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger" role="alert"></p>
+			
+			
+			<label for="password"  class="control-label" th:field="*{password}">Password:</label>
+			<input type="password" name="password" class="form-control"></input>
+			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger" role="alert"></p>
+			
+			
+		    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			
+			<input class="btn btn-primary" type="submit" value="Register"/>
+			</fieldset>
+		
+		</form>
+		
+			
+	</section>
+</html>

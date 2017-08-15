@@ -1,7 +1,9 @@
 package com.remind_me.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,23 +13,29 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.remind_me.reminder.Reminder;
 
+/**
+ * @author anna
+ *
+ */
 @Entity
 public class User implements UserDetails {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String username;
+	private String userName;
 	private String password;
 	private String email;
+	private String role;
 	
 	
 	public User(String username, String password, String email) {
-		this.username = username;
+		this.userName = username;
 		this.password = password;
 		this.email = email;
 	}
@@ -44,11 +52,11 @@ public class User implements UserDetails {
 	}
 
 	public String getUsername() {
-		return username;
+		return userName;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.userName = username;
 	}
 
 	public String getPassword() {
@@ -72,7 +80,7 @@ public class User implements UserDetails {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
@@ -90,10 +98,10 @@ public class User implements UserDetails {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (username == null) {
-			if (other.username != null)
+		if (userName == null) {
+			if (other.userName != null)
 				return false;
-		} else if (!username.equals(other.username))
+		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
 	}
@@ -101,13 +109,14 @@ public class User implements UserDetails {
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + "]";
+		return "User [id=" + id + ", username=" + userName + ", password=" + password + ", email=" + email + "]";
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority(role.toString()));
+		return authorities;
 	}
 
 	@Override
@@ -133,6 +142,16 @@ public class User implements UserDetails {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
 	
 	
 }
