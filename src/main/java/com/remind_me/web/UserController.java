@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.remind_me.reminder.Reminder;
+import com.remind_me.reminder.ReminderService;
 import com.remind_me.user.User;
 import com.remind_me.user.UserService;
 
@@ -21,8 +23,11 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	ReminderService reminderService;
+	
 	@RequestMapping(value="/login")
-	public String login(Model model){
+	public String loginForm(Model model){
 		return "login";
 	}
 	
@@ -51,5 +56,17 @@ public class UserController {
 
 	   return "redirect:/user/login";
    }
-  
+   
+   @RequestMapping(value="/home")
+   public String home(){
+	   return "home";
+   }
+   
+   @RequestMapping(value="/add_reminder")
+   public String addReminderForm(Model model){
+	   model.addAttribute("reminder", new Reminder());
+	   return "add_form";
+	   
+   }
+   
 }

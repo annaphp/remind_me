@@ -1,0 +1,20 @@
+<html layout:decorator="layout/base">
+	<section layout:fragment="content">		
+		<form th:action="@{/user/add_reminder}"  method="post">
+			<div class="form-group">
+				<label> Title</label>
+				<input type="text"></input>
+				<label>Content</label>
+				<textarea class="form-control" rows="3"></textarea>
+				<label class=control-label" for="date">Date</label>
+				<input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"></input>
+				
+				<button class="btn btn-primary" type="submit">Submit</button>	
+			</div>
+		
+		
+		</form>
+		
+			
+	</section>
+</html>
