@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.remind_me.user.User;
 
 
@@ -22,9 +24,29 @@ public class Reminder {
 	
 	private String title;
 	private String content;
+	private Status status = Status.NOT_DONE;
+	private Category category = Category.OTHER;
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	private LocalDate dueDate;
 	
 	
+	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	public Reminder(String title, String content, LocalDate dueDate) {
 		this.title = title;
 		this.content = content;
