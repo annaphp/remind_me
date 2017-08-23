@@ -62,7 +62,9 @@ public class UserController {
    }
    
    @RequestMapping(value="/home")
-   public String home(){
+   public String home(Model model, Principal principal){
+	   User currentUser = userService.findByUserName(principal.getName());
+	   model.addAttribute("reminders", reminderService.findByUser(currentUser));
 	   return "home";
    }
    

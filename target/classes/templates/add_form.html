@@ -29,7 +29,7 @@
 		</select>
 		<div>
 		<label class="control-label" >Category</label>
-	    <div th:each="category : ${category}" class="radio">
+	    <div th:each="category : ${category}" >
 	   
            <input type="radio" th:value="${category}" th:field="*{category}" />
            <label th:for="${#ids.prev('category')}" th:text="${category.toString()}"></label>

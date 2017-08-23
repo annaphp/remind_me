@@ -3,6 +3,23 @@
 		<h1> Hello this is your home page!</h1>
 		<a th:href="@{/user/add_reminder}"   > add reminder</a>
 		
-			
+		
+		<div  th:if="${! #sets.isEmpty(reminders)}">
+		<h3> Reminders:</h3>
+	 	
+				
+		<div th:each="r,iterator : ${reminders}">
+					<p th:text="${iterator.count}"></p>
+					<h6  th:text="${r.title}"></h6>
+					<h6 th:text="${r.dueDate}"></h6>
+					 
+					<a th:href="@{/read/article/{id}(id=${r.id})}" class="glyphicon glyphicon-eye-open"  ></a>
+					<a th:href="@{/user/edit/{id}(id=${r.id})}" class="glyphicon glyphicon-pencil"  ></a>
+					<a th:href="@{/user/delete/{id}(id=${r.id})}"  class="glyphicon glyphicon-trash"></a>
+					
+		
+		</div>
+	</div>
+		
 	</section>
 </html>
