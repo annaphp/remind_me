@@ -6,20 +6,23 @@
 		
 		<div  th:if="${! #sets.isEmpty(reminders)}">
 		<h3> Reminders:</h3>
-	 	
+
 				
-		<div th:each="r,iterator : ${reminders}">
-					<p th:text="${iterator.count}"></p>
-					<h6  th:text="${r.title}"></h6>
-					<h6 th:text="${r.dueDate}"></h6>
-					 
-					<a th:href="@{/read/article/{id}(id=${r.id})}" class="glyphicon glyphicon-eye-open"  ></a>
-					<a th:href="@{/user/edit/{id}(id=${r.id})}" class="glyphicon glyphicon-pencil"  ></a>
-					<a th:href="@{/user/delete/{id}(id=${r.id})}"  class="glyphicon glyphicon-trash"></a>
-					
-		
-		</div>
-	</div>
+ 	<ul th:each="r : ${reminders}"  class="list-group">
+				<li class="list-group-item">
+					<span  th:text="${r.title}"></span>
+					<span> Due on: </span>
+					<span th:text=" ${r.dueDate}"></span>
+					<p>
+						<a th:href="@{/read/view/{id}(id=${r.id})}" class="glyphicon glyphicon-eye-open"  ></a>
+						<a th:href="@{/user/edit_reminder/{id}(id=${r.id})}" class="glyphicon glyphicon-pencil"  ></a>
+						<a th:href="@{/user/delete_reminder/{id}(id=${r.id})}"  class="glyphicon glyphicon-trash"></a>
+					</p>
+				</li>	
+	   </ul>  
+</div>
+
+
 		
 	</section>
 </html>

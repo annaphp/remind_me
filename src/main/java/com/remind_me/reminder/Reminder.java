@@ -140,7 +140,8 @@ public class Reminder {
 
 	@Override
 	public String toString() {
-		return "Reminder [id=" + id + ", user=" + user + ", title=" + title + ", dueDate=" + dueDate + "]";
+		return "Reminder [id=" + id + ", user=" + user + ", title=" + title +
+				", dueDate=" + dueDate + ", status" + status  + ", category "+ category+ "]";
 	}
 	
 	

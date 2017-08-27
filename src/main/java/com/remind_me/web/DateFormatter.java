@@ -16,7 +16,7 @@ public class DateFormatter implements Formatter<LocalDate> {
 	@Override
 	public String print(LocalDate date, Locale arg1) {
 		System.out.println("printing date to string");
-		return date.toString();
+		return date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")).toString();
 	}
 
 	@Override

@@ -33,12 +33,16 @@ public class ReminderService {
 		return repository.findAll();
 	}
 	
-	public void delete(Reminder reminder){
-		repository.delete(reminder);
+	public void delete(Long id){
+		repository.delete(id);
 	}
 	
 	public List<Reminder> findByUser(User user){
 		return repository.findByUser(user);
+	}
+	
+	public Reminder update(Reminder reminder){
+		return repository.saveAndFlush(reminder);
 	}
 }
 

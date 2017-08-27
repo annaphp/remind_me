@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -81,6 +82,27 @@ public class UserController {
 								Principal principal ){
 	   reminderService.save(reminder,userService.findByUserName(principal.getName()));
 	   return "redirect:/user/home"; 
+   }
+   
+   @RequestMapping(value="edit_reminder/{id}")
+   public String editReminderForm(@PathVariable("id") Long id, Model model){
+	   Reminder reminder = reminderService.findById(id);
+	   model.addAttribute("reminder", reminder);
+	   model.addAttribute("status", Status.values());
+	   model.addAttribute("category", Category.values());
+	   return "edit_form";
+   }
+   
+   @RequestMapping(value="/update_reminder", method = RequestMethod.POST)
+   public String updateReminder(@ModelAttribute Reminder reminder){
+	   reminderService.update(reminder);
+	   return "redirect:/user/home"; 
+   }
+   
+   @RequestMapping(value="/delete_reminder/{id}")
+   public String deleteReminder(@PathVariable("id") Long id){
+	   reminderService.delete(id);
+	   return "redirect:/user/home";
    }
    
 }
