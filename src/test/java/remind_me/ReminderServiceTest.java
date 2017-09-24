@@ -57,10 +57,6 @@ public class ReminderServiceTest {
 		assertNotNull(reminderService.findByUser(user1));
 	}
 	
-	@Test
-	public void shouldDelete(){
-		reminderService.delete(reminder1);
-		assertNull(reminderService.findById(reminder1.getId()));
-	}
+	
 
 }

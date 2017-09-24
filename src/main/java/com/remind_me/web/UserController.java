@@ -1,6 +1,7 @@
 package com.remind_me.web;
 
 import java.security.Principal;
+import java.time.LocalDate;
 
 import javax.validation.Valid;
 
@@ -30,6 +31,7 @@ public class UserController {
 	
 	@Autowired
 	ReminderService reminderService;
+	
 	
 	@RequestMapping(value="/login")
 	public String loginForm(Model model){
@@ -78,9 +80,28 @@ public class UserController {
    }
    
    @RequestMapping(value="/save_reminder", method = RequestMethod.POST)
-   public String saveReminder(@ModelAttribute Reminder reminder, 
-								Principal principal ){
+   public String saveReminder(@Valid @ModelAttribute Reminder reminder, Errors errors,
+								Principal principal, Model model ){
+	   if(errors.hasErrors()){
+		   model.addAttribute("reminder", reminder);
+		   model.addAttribute("status", Status.values());
+		   model.addAttribute("category", Category.values());
+		   return "add_form";
+	   }
+	   
+	   //validating date if selected due date is in the past the input date is rejected
+	   LocalDate dueDate = reminder.getDueDate();
+	   LocalDate todayDate = LocalDate.now();
+	   
+	   if(dueDate.isBefore(todayDate)){
+		   errors.rejectValue("dueDate", "pastDueDate","Due date cannot be in the past!");
+		   model.addAttribute("reminder", reminder);
+		   model.addAttribute("status", Status.values());
+		   model.addAttribute("category", Category.values());
+		   return "add_form";   
+	   }
 	   reminderService.save(reminder,userService.findByUserName(principal.getName()));
+	   model.addAttribute("messages", "Reminder has been added!");
 	   return "redirect:/user/home"; 
    }
    
@@ -94,14 +115,16 @@ public class UserController {
    }
    
    @RequestMapping(value="/update_reminder", method = RequestMethod.POST)
-   public String updateReminder(@ModelAttribute Reminder reminder){
+   public String updateReminder(@ModelAttribute Reminder reminder, RedirectAttributes model){
 	   reminderService.update(reminder);
+	   model.addFlashAttribute("messages", "Reminder has been updated!");
 	   return "redirect:/user/home"; 
    }
    
    @RequestMapping(value="/delete_reminder/{id}")
-   public String deleteReminder(@PathVariable("id") Long id){
+   public String deleteReminder(@PathVariable("id") Long id, RedirectAttributes model){
 	   reminderService.delete(id);
+	   model.addFlashAttribute("messages", "Reminder has been deleted!");
 	   return "redirect:/user/home";
    }
    

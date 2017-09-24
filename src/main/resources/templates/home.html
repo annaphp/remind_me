@@ -1,7 +1,16 @@
 <html layout:decorator="layout/base">
 	<section layout:fragment="content">	
-		<h1> Hello this is your home page!</h1>
-		<a th:href="@{/user/add_reminder}"   > add reminder</a>
+		
+		
+      
+  
+	     <div th:if="${messages}">
+			<div class="alert alert-success" role="alert" th:text="${messages}" >...</div>
+		</div>
+
+
+		
+		
 		
 		
 		<div  th:if="${! #sets.isEmpty(reminders)}">
@@ -10,12 +19,11 @@
 				
  	<ul th:each="r : ${reminders}"  class="list-group">
 				<li class="list-group-item">
-					<span  th:text="${r.title}"></span>
-					<span> Due on: </span>
-					<span th:text=" ${r.dueDate}"></span>
+					<p th:text="${r.title}"></p>
+					<p> Due on: <span th:text=" ${r.dueDate}"></span> </p>
+					<p th:text="${r.content}"></p>
 					<p>
-						<a th:href="@{/read/view/{id}(id=${r.id})}" class="glyphicon glyphicon-eye-open"  ></a>
-						<a th:href="@{/user/edit_reminder/{id}(id=${r.id})}" class="glyphicon glyphicon-pencil"  ></a>
+						<a th:href="@{/user/edit_reminder/{id}(id=${r.id})}" class="glyphicon glyphicon-pencil" ></a>
 						<a th:href="@{/user/delete_reminder/{id}(id=${r.id})}"  class="glyphicon glyphicon-trash"></a>
 					</p>
 				</li>	

@@ -5,7 +5,13 @@
 	<head>
 		<div th:include="layout/style"> style </div>
 	</head>
+	
 <body>
+
+	 <nav class="navbar navbar-inverse bg-inverse" sec:authorize="isAuthenticated()">
+    		<a class="navbar-brand" th:href="@{/user/add_reminder}"  > Add reminder</a>	
+    		<a class="navbar-brand pull-right" th:href="@{/logout}"> Log out</a>
+	 </nav>
 	
 	<div class="container" layout:fragment="content"></div>
 	<hr/>

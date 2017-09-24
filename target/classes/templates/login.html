@@ -1,22 +1,27 @@
 <html layout:decorator="layout/base">
-	<section layout:fragment="content">		
-		<form  class="form-horizontal" th:action="@{/user/login}"  method="post">
+	<section layout:fragment="content">	
+	<section class="main_page">
+	<div class="wrapper">
+		<form  class="form-signin" th:action="@{/user/login}"  method="post">
+		
+		<!-- error messages -->
 		<div th:if="${messages}">
-			<div class="alert alert-success" role="alert" th:text="${messages}" >...</div>
+			<div class="alert alert-success" role="alert" th:text="${messages}" ></div>
 		</div>
-			<fieldset>
+		<!--  end of error messages -->
 			
-			<h3> Log In:</h3>
-			<label for="username"  class="control-label">Username</label>
-			<input type="text" name="username" class="form-control"></input>
-			<label for="password"  class="control-label">Password</label>
-			<input type="password" name="password" class="form-control"></input>
+			<h2 class="form-signin-heading">Please login</h2>
+
+			<input type="text" name="username" class="form-control" placeholder="User Name" autofocus=""></input>
+			<input type="password" name="password" class="form-control" placeholder="Password"></input>
 		    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			
-			<input class="btn btn-primary" type="submit" value="Sign In"/>
-			</fieldset>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+			<a th:href="@{/user/register}">Create Account</a>
 		</form>
-		
+ 			
+	</div>	
+	</section>	
 			
-	</section>
-</html>
+	</section> 
+	</html>	

@@ -13,19 +13,23 @@
         
          <label class="control-label">Title</label>
       	<input  class="form-control" type="text" th:field="*{title}" />
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger" role="alert"></p>
+      	
       	
       	 <label class="control-label">Content</label>
       	<textarea  class="form-control" rows="6" type="text" th:field="*{content}" ></textarea>
       	
         <label class="control-label" for="date">Date</label>
         <input th:field="*{dueDate}" class="form-control" id="dueDate" name="dueDate" placeholder="MM/DD/YYY" type="text"  />
-        
+         <p th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}" class="alert alert-danger" role="alert"></p>
+         
         <label class="control-label" >Status</label>
         
 		<select th:field="*{status}">
 		    <option th:each="s : ${status}"
 		            th:value="${s}"
-		            th:text="${s.toString()}"> </option>
+		          
+		           th:text="${s.toString()}"> </option> 
 		</select>
 		<div>
 		<label class="control-label" >Category</label>
