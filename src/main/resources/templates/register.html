@@ -1,7 +1,8 @@
 <html layout:decorator="layout/base">
 	<section layout:fragment="content">		
-	
-		<form  class="form-horizontal" th:action="@{/user/register}" th:object="${userToRegister}" method="post">
+	<div id="regimg" class="col col-lg-12">
+    <div  class="col col-lg-6">
+		<form  class="form-signin" th:action="@{/user/register}" th:object="${userToRegister}" method="post">
 		
 			<h3> Please register to create reminders:</h3>
 			<fieldset>
@@ -24,9 +25,17 @@
 			
 			<input class="btn btn-primary" type="submit" value="Register"/>
 			</fieldset>
+		    <a th:href="@{/user/login}">Login</a>
 		
-		</form>
+		</form>	
+		</div>
+		<div class="col col-lg-6" id="reg_note" >
+			<p> Millions of people rely on Remind me to remember the things!
+			Get reminded via e-mail.</p>
+		</div>
 		
+		
+		</div>
 			
 	</section>
 </html>

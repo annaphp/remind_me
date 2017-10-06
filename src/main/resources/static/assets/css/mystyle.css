@@ -1,6 +1,49 @@
 .main_page{
-	 background-image: url("/assets/images/elizabeth-lies-20237.jpg");
+	
+	background-image: url("/assets/images/teresa-kluge-237956.jpg");
+ 	background-size: cover;
+ 	background-position: center;
 }
+
+
+.wel_note{	
+    font-family: 'Encode Sans Expanded', sans-serif;
+    font-family: 'Raleway', sans-serif;	
+    text-align: center;    
+}
+#reg_note{
+	 font-family: 'Encode Sans Expanded', sans-serif;
+    font-family: 'Raleway', sans-serif;	
+    text-align: center; 
+    padding: 150px 0;
+    color:white;
+    font-size: 200%;
+}
+
+
+body{
+	background-color: #e6f3ff;
+	height: 100%;
+	padding-bottom: 200px;
+}
+
+.footer{
+	 position: absolute;
+	 bottom: 0;
+	 left: 0;
+	 width: 100%;
+	 height: 100px;
+	 background-color: white;
+	 text-align: center; 
+	 font-family: 'Encode Sans Expanded', sans-serif;
+     font-family: 'Raleway', sans-serif;	
+}
+
+#regimg{
+	background-image: url("/assets/images/sabri-tuzcu-331970.jpg");
+	background-size: cover;
+}
+
 
 .wrapper {	
   margin-top: 80px;
@@ -11,35 +54,29 @@
   max-width: 380px;
   padding: 15px 35px 45px;
   margin: 0 auto;
-  background-color:#ccddff;
+  background-color:white;
   border: 1px solid rgba(0,0,0,0.1);  
 
-.form-signin-heading,
-	.checkbox {
-	  margin-bottom: 30px;
-	}
 
-	
-
-	.form-control {
+.form-control {
 	  position: relative;
 	  font-size: 16px;
 	  height: auto;
 	  padding: 10px;
-		@include box-sizing(border-box);
+	  @include box-sizing(border-box);
 
-		&:focus {
-		  z-index: 2;
-		}
+&:focus {
+	z-index: 2;
+}
 	}
 
-	input[type="text"] {
-	  margin-bottom: -1px;
-	  border-bottom-left-radius: 0;
-	  border-bottom-right-radius: 0;
-	}
+input[type="text"] {
+   margin-bottom: -1px;
+   border-bottom-left-radius: 0;
+   border-bottom-right-radius: 0;
+}
 
-	input[type="password"] {
+input[type="password"] {
 	  margin-bottom: 20px;
 	  border-top-left-radius: 0;
 	  border-top-right-radius: 0;

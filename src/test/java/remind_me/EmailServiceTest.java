@@ -45,15 +45,15 @@ public class EmailServiceTest {
 	    reminder2 = reminderService.save(reminder2, user);
 	}
 	
-	@Test
-	public void shouldSendEmail(){
-		String to = "";
-		String subject = "friendly Reminder";
-		String text = "test";
-		String email = "friendlyreminderrr@gmail.com";
-		String password = "";
-		emailService.send(to, subject, text, email, password);;
-	}
+//	@Test
+//	public void shouldSendEmail(){
+//		String to = "";
+//		String subject = "friendly Reminder";
+//		String text = "test";
+//		String email = "friendlyreminderrr@gmail.com";
+//		String password = "";
+//		emailService.send(to, subject, text, email, password);;
+//	}
 	
 	
 }

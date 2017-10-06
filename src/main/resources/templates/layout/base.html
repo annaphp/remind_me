@@ -2,20 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xmlns:th="http://www.thymeleaf.org" 
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-	<head>
-		<div th:include="layout/style"> style </div>
-	</head>
-	
+<head>
+	<div th:include="layout/style"> style </div>
+</head>
 <body>
 
 	 <nav class="navbar navbar-inverse bg-inverse" sec:authorize="isAuthenticated()">
+	 		<a class="navbar-brand" th:href="@{/user/home}"  >All Reminders</a>	
     		<a class="navbar-brand" th:href="@{/user/add_reminder}"  > Add reminder</a>	
     		<a class="navbar-brand pull-right" th:href="@{/logout}"> Log out</a>
 	 </nav>
 	
-	<div class="container" layout:fragment="content"></div>
+	<div layout:fragment="content"></div>
 	<hr/>
 	
+<footer  >
+
+		<p>Copyright &copy; 2017</p>
+
+	</footer>	
 	
 </body>
+
 </html>
