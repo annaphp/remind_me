@@ -2,6 +2,7 @@ package com.remind_me.reminder;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -59,22 +60,22 @@ public class ReminderService {
 	
 	@Scheduled(fixedRate = 60000, initialDelay = 5000)
 	public void sendReminders(){
-	  System.out.println("Reminder service emailer runs");
-	  System.out.println(reminderRepo.findAll());
+		//all reminders that are due today or tomorrow
 	   Set<Reminder> dueSoon = reminderRepo.findAll().stream().filter(r -> r.getDueDate().isEqual(LocalDate.now()) ||
 			   						r.getDueDate().isAfter(LocalDate.now()) 
 			   						&& r.getDueDate().isBefore(LocalDate.now().plusDays(2))).collect(Collectors.toSet());
-	   System.out.println("Due soon" + dueSoon.toString());
 	   for(Reminder r : dueSoon){
 		   User u = r.getUser();
-		   String title = "Your reminder from Friendly Reminder - " + r.getContent() + " Due on " + r.getDueDate();
-		   emailService.send(u.getEmail(), title, r.getContent());
+		   //email subject
+		   String subject = "Friendly Reminder - " + r.getTitle() + " Due on " + r.getDueDate();
+		   emailService.send(u.getEmail(), subject, r.getContent());
+		   //reminder is deleted after it's sent
 		   reminderRepo.delete(r);
 	   }
 		
 	}
 	
-	@Scheduled(fixedRate = 60000, initialDelay = 5000)
+	@Scheduled(fixedRate = 120000, initialDelay = 60000)
 	public void createRemidersFromEmails(){
 		Set<Email> emails = emailService.fetchEmails();
 		for(Email e : emails){
@@ -82,14 +83,28 @@ public class ReminderService {
 			String title = e.getSubject();
 			String content = e.getContent();
 			//converting string to local date
-			String reminderDuedate = content.substring(0, content.indexOf("\n")-1);
-			LocalDate date =  LocalDate.parse(reminderDuedate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+			String reminderDuedate = content.substring(0, content.indexOf("\n")-1);//first line of email is due date, format: MM/DD/YYYY
 			
-			String reminderContent = content.substring(reminderDuedate.length());
-			Reminder reminder = new Reminder(title,reminderContent,date);
-			save(reminder, user);
-		}
+			try{
+				LocalDate date =  LocalDate.parse(reminderDuedate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+				String reminderContent = content.substring(reminderDuedate.length());
+				Reminder reminder = new Reminder(title,reminderContent,date);
+				save(reminder, user);
+				//send confirmation that reminder was saved
+				String successConfirmationText = "Your reminder " + reminder.getTitle()
+												  + "for due date " + reminder.getDueDate() + " has been created!"; 
+				
+			    emailService.send(user.getEmail(), "Friendly Reminder - Reminder Created", successConfirmationText);
+			 }catch(DateTimeParseException excepton){
+				//email that creation of reminder failed
+				String failureNotificationText = "Sorry! We could't not create your reminder for " + title + "."
+						+ "\n Please make sure you are using a correct format for your email. Your email body should look like below:" 
+						+ "\n DD/MM/YYYY" + "\n Reminder content";
+				emailService.send(user.getEmail(), "Friendly Reminder - Oops something went wrong!", failureNotificationText);	
+			}
+		}	
 	}
-	
 }
+	
+
 

@@ -4,14 +4,12 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.mail.Address;
 import javax.mail.BodyPart;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
-import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
@@ -23,8 +21,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.remind_me.reminder.Reminder;
-import com.remind_me.user.User;
 import com.remind_me.user.UserService;
 
 @Service
@@ -41,9 +37,7 @@ public class EmailService {
 	
 	@Value("${storeType}")
 	private String storeType;
-	
-	
-	
+
 	@Autowired
 	UserService userService;
 	

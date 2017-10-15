@@ -1,30 +1,27 @@
 <html layout:decorator="layout/base">
 	<section layout:fragment="content">	
-		
-		
-      
-  
-	     <div th:if="${messages}">
-			<div class="alert alert-success" role="alert" th:text="${messages}" >...</div>
-		</div>
-		<div  th:if="${! #sets.isEmpty(reminders)}">
-		<h3> Reminders:</h3>
-
-				
- 	<ul th:each="r : ${reminders}"  class="list-group">
-				<li class="list-group-item">
-					<p th:text="${r.title}"></p>
-					<p> Due on: <span th:text=" ${r.dueDate}"></span> </p>
-					<p th:text="${r.content}"></p>
-					<p>
-						<a th:href="@{/user/edit_reminder/{id}(id=${r.id})}" class="glyphicon glyphicon-pencil" ></a>
-						<a th:href="@{/user/delete_reminder/{id}(id=${r.id})}"  class="glyphicon glyphicon-trash"></a>
-					</p>
-				</li>	
-	   </ul>  
-</div>
-
-
-		
+		<div class="main-wrapper">
+			<!--  flash messages code to confirm addition and edit of reminders -->
+	    	 <div th:if="${messages}">
+				<div class="alert alert-success" role="alert" th:text="${messages}" >...</div>
+			</div>
+			<!--  end of flash messages code -->
+			
+			<div  th:if="${! #sets.isEmpty(reminders)}">
+				<h2> Reminders:</h2>
+ 				<ul th:each="r : ${reminders}"  class="list-group">
+					<li class="list-group-item">
+						<h3 class="bullet-point"  th:text="${r.title}"></h3>
+						<p> Due on: <span th:text=" ${r.dueDate}"></span> </p>
+							<p th:text="${r.content}"></p>
+						<p>
+							<a th:href="@{/user/edit_reminder/{id}(id=${r.id})}" class="glyphicon glyphicon-pencil" ></a>
+							<a th:href="@{/user/delete_reminder/{id}(id=${r.id})}"  class="glyphicon glyphicon-trash"></a>
+					   </p>
+					</li>	
+	  		   </ul>  
+			</div>
+	</div>	
 	</section>
 </html>
+
