@@ -100,7 +100,6 @@ public class EmailService {
 				//email is deleted from the inbox folder after read
 				message.setFlag(Flags.Flag.DELETED, true);
 			}
-			System.out.println("***Printing emails" + emails);
 			
 			emailFolder.close(true);
 			store.close();	
@@ -119,9 +118,7 @@ public class EmailService {
     	if(message.isMimeType("text/plain")){
     		String content = (String)message.getContent();
     		email.setContent(content);
-    		
-    		System.out.println("1. When content is text/plain" + email.getContent());
-    		
+    		    		
     	}else if(message.isMimeType("multipart/alternative")){
     		
     		Multipart multipart = (Multipart)message.getContent();
@@ -132,7 +129,6 @@ public class EmailService {
     			if(bodyPart.isMimeType("text/plain")){
     				String content = (String)bodyPart.getContent();
     				email.setContent(content);
-    	    		System.out.println("2. When content is text/plain in mulipart " + email.getContent());
    			    }
     		}
     	}
