@@ -2,7 +2,7 @@
 	<section layout:fragment="content">		
 	<div id="regimg" class="col col-lg-12">
     <div  class="col col-lg-6">
-		<form  class="form-signin" th:action="@{/user/register}" th:object="${userToRegister}" method="post">
+		<form  class="form-signin" th:action="@{/register}" th:object="${userToRegister}" method="post">
 		
 			<h3> Please register to create reminders:</h3>
 			<fieldset>
@@ -25,7 +25,7 @@
 			
 			<input class="btn btn-primary" type="submit" value="Register"/>
 			</fieldset>
-		    <a th:href="@{/user/login}">Login</a>
+		    <a th:href="@{/login}">Login</a>
 		
 		</form>	
 		</div>

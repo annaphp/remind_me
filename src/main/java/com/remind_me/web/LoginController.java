@@ -51,6 +51,6 @@ public class LoginController {
 		userService.create(user, "ROLE_OWNER"); // this method checks if user already exists
 		model.addFlashAttribute("messages", "You have been successfully registered! Please login.");
 
-		return "redirect:/user/login";
+		return "redirect:/login";
 	}
 }

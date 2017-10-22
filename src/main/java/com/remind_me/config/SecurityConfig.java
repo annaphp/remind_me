@@ -49,10 +49,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	                .loginPage("/user/login")
 	                .permitAll()
 	                .successHandler((request, response, authentication) -> response.sendRedirect("/user/home/"))
-	                .failureHandler((request, response, authentication) -> response.sendRedirect("/user/login"))
+	                .failureHandler((request, response, authentication) -> response.sendRedirect("/login"))
 	                .and()
 	           .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-	                .logoutSuccessUrl("/user/login").deleteCookies("JSESSIONID")
+	                .logoutSuccessUrl("/login").deleteCookies("JSESSIONID")
 	                .invalidateHttpSession(true) 	            
 	                .and()
 	           .csrf();    

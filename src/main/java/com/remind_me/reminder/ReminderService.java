@@ -77,7 +77,7 @@ public class ReminderService {
 	public void initialReminders(){
 		sendReminders();
 	}
-	
+		
 	
 }
 	
