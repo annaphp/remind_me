@@ -73,7 +73,7 @@ public class ReminderService {
 		
 	}
 	
-	@Scheduled(fixedRate = Long.MAX_VALUE)
+	@Scheduled(fixedRate=Long.MAX_VALUE, initialDelay=300000)
 	public void initialReminders(){
 		sendReminders();
 	}
