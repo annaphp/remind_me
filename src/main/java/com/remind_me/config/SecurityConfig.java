@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		            .antMatchers("/user/**").hasRole("OWNER")
 		           	.and()
 	            .formLogin()
-	                .loginPage("/user/login")
+	                .loginPage("/login")
 	                .permitAll()
 	                .successHandler((request, response, authentication) -> response.sendRedirect("/user/home/"))
 	                .failureHandler((request, response, authentication) -> response.sendRedirect("/login"))
