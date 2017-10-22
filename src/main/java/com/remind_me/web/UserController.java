@@ -32,37 +32,7 @@ public class UserController {
 	@Autowired
 	ReminderService reminderService;
 	
-	
-	@RequestMapping(value="/login")
-	public String loginForm(Model model){
-		return "login";
-	}
-	
-   @RequestMapping(value="/register")
-	public String registerForm(Model model){
-	   model.addAttribute("userToRegister", new User());
-	   return "register";
-		
-	}
-   
-   @RequestMapping(value="/register", method=RequestMethod.POST)
-   public String register(@Valid @ModelAttribute("userToRegister") User user, Errors errors, RedirectAttributes model){
-	   if(errors.hasErrors()){
-		   model.addAttribute("userToRegister", user);
-		   return "register";
-	   }
-			
-	   if(userService.usernameTaken(user)){
-		   errors.rejectValue("username", "Match", "This username is taken.");
-		   model.addAttribute("userToRegister", user);
-		   return "register";
-	   }
-	   
-	   userService.create(user, "ROLE_OWNER");	//this method checks if user already exists	
-	   model.addFlashAttribute("messages","You have been successfully registered! Please login.");
 
-	   return "redirect:/user/login";
-   }
    
    @RequestMapping(value="/home")
    public String home(Model model, Principal principal){

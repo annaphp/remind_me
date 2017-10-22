@@ -1,7 +1,6 @@
 package com.remind_me.reminder;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +10,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.remind_me.email.Email;
 import com.remind_me.email.EmailService;
 import com.remind_me.user.User;
 import com.remind_me.user.UserService;
@@ -57,7 +55,7 @@ public class ReminderService {
 		return reminderRepo.saveAndFlush(reminder);
 	}
 	
-	@Scheduled(fixedRate = 60000, initialDelay = 5000)
+	@Scheduled(cron="0 0 1-5 * * *")
 	public void sendReminders(){
 		System.out.println("1. Send reminders method begins");
 		//all reminders that are due today or tomorrow
@@ -75,22 +73,12 @@ public class ReminderService {
 		
 	}
 	
-	@Scheduled(fixedRate = 60000, initialDelay = 30000)
-	public void createRemidersFromEmails(){
-		System.out.println("2. Create reminders from emails begins ");
-		Set<Email> emails = emailService.fetchEmails();
-		for(Email e : emails){
-			User user = userService.findUserByEmail(e.getSender());
-			String title = e.getSubject();
-			String content = e.getContent();
-			//converting string to local date
-			String reminderDuedate = content.substring(0, content.indexOf("\n")-1);//first line of email is due date, format: MM/DD/YYYY
-		    LocalDate date =  LocalDate.parse(reminderDuedate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-		    String reminderContent = content.substring(reminderDuedate.length());
-			Reminder reminder = new Reminder(title,reminderContent,date);
-		    save(reminder, user);
-		}	
+	@Scheduled(fixedRate = Long.MAX_VALUE)
+	public void initialReminders(){
+		sendReminders();
 	}
+	
+	
 }
 	
 
