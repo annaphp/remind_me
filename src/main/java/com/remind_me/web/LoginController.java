@@ -60,8 +60,12 @@ public class LoginController {
 		}
 
 		user = userService.create(user, "ROLE_OWNER"); // this method checks if user already exists
-		model.addFlashAttribute("messages", "We send you an email, please follow a link in that email to verify your email address");
-		emailService.send(user.getEmail(), "Welcome to remindeme app", "http://45.77.115.43:8080/verifyEmail/"+user.getVerificationCode());
+		model.addFlashAttribute("messages", "We send you an email, please follow a link in that email to verify your email address, please also check spam folder");
+		emailService.send(user.getEmail(), 
+				"Welcome to remindeme app", 
+				"Please follow this link: "
+				+ "http://45.77.115.43:8080/verifyEmail/"+user.getVerificationCode()
+				+ "this link will expire in 7 days.");
 		return "redirect:/login";
 	}
 }
