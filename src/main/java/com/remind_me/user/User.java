@@ -32,9 +32,13 @@ public class User implements UserDetails {
 	private String role;
 	private LocalDateTime emailVerified = LocalDateTime.MAX;
 	private String verificationCode;
+	private LocalDateTime createdDate;
 	
+	
+
 	@PrePersist
 	public void initVerification(){
+		createdDate = LocalDateTime.now();
 		verificationCode = UUID.randomUUID().toString();
 	}
 	
@@ -48,6 +52,15 @@ public class User implements UserDetails {
 	}
 
 
+	
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
 	public String getUserName() {
 		return userName;
 	}

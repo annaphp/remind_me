@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -86,5 +87,17 @@ public class UserService implements UserDetailsService{
 	
 	public User findUserByEmail(String email){
 		return repository.findByEmail(email);
+	}
+	
+	@Scheduled(initialDelay = 5000, fixedRate = 60000)
+	public void deleteUnverifiedUsers(){
+		List<User> all = findAll();
+		for(User u : all){
+			//if account is disabled and was created longer than a week ago from today's date
+		if(!u.isEnabled() && u.getCreatedDate().plusWeeks(1L).isBefore(LocalDateTime.now())){
+				System.out.println("Deleting user: " + u);
+				delete(u);
+			}
+		}
 	}
 }
