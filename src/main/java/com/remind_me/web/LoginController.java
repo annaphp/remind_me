@@ -8,11 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.remind_me.email.EmailService;
 import com.remind_me.user.User;
 import com.remind_me.user.UserService;
 
@@ -21,6 +21,9 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	EmailService emailService;
 
 	@GetMapping(path = { "/login", "/" })
 	public String loginForm(Model model) {
@@ -32,6 +35,14 @@ public class LoginController {
 		model.addAttribute("userToRegister", new User());
 		return "register";
 
+	}
+	
+	@GetMapping(value ="/verifyEmail/{verificationCode}")
+	public String verifyEmail(	@PathVariable("verificationCode") String verificationCode, RedirectAttributes model){ 
+		userService.verifyEmail(verificationCode);
+		model.addFlashAttribute("messages", "Thank you for verifying your email, please log in");
+		return "redirect:/login";
+		
 	}
 
 	@PostMapping(value = "/register")
@@ -48,9 +59,9 @@ public class LoginController {
 			return "register";
 		}
 
-		userService.create(user, "ROLE_OWNER"); // this method checks if user already exists
-		model.addFlashAttribute("messages", "You have been successfully registered! Please login.");
-
+		user = userService.create(user, "ROLE_OWNER"); // this method checks if user already exists
+		model.addFlashAttribute("messages", "We send you an email, please follow a link in that email to verify your email address");
+		emailService.send(user.getEmail(), "Welcome to remindeme app", "http://45.77.115.43:8080/verifyEmail/"+user.getVerificationCode());
 		return "redirect:/login";
 	}
 }

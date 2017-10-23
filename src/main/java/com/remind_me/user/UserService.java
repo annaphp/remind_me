@@ -1,5 +1,6 @@
 package com.remind_me.user;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,12 @@ public class UserService implements UserDetailsService{
 	
 	public User findByUserName(String username){
 		return repository.findByUserName(username);	
+	}
+	
+	public User verifyEmail(String verificationCode){
+		User user = repository.findOneByVerificationCode(verificationCode);
+		user.setEmailVerified(LocalDateTime.now());
+		return repository.saveAndFlush(user);
 	}
 
 	@Override

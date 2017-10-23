@@ -41,15 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	 @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	        http
-		        .authorizeRequests()
+		        .authorizeRequests()// reverse order
+		        	.antMatchers("/user/**").hasRole("OWNER")
 		            .antMatchers("/","/register").permitAll()
-		            .antMatchers("/user/**").hasRole("OWNER")
 		           	.and()
 	            .formLogin()
 	                .loginPage("/login")
 	                .permitAll()
 	                .successHandler((request, response, authentication) -> response.sendRedirect("/user/home/"))
-	                .failureHandler((request, response, authentication) -> response.sendRedirect("/login"))
+	                .failureHandler((request, response, authentication) -> response.sendRedirect("/login") )
 	                .and()
 	           .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 	                .logoutSuccessUrl("/login").deleteCookies("JSESSIONID")

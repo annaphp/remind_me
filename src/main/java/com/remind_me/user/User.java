@@ -1,12 +1,15 @@
 package com.remind_me.user;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 public class User implements UserDetails {
 	
+	
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -26,7 +30,13 @@ public class User implements UserDetails {
 	private String password;
 	private String email;
 	private String role;
+	private LocalDateTime emailVerified = LocalDateTime.MAX;
+	private String verificationCode;
 	
+	@PrePersist
+	public void initVerification(){
+		verificationCode = UUID.randomUUID().toString();
+	}
 	
 	public User(String username, String password, String email) {
 		this.userName = username;
@@ -34,8 +44,33 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 	
-	public User(){}
-	
+	public User(){
+	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public LocalDateTime getEmailVerified() {
+		return emailVerified;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setEmailVerified(LocalDateTime emailVerified) {
+		this.emailVerified = emailVerified;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
 
 	public Long getId() {
 		return id;
@@ -132,9 +167,8 @@ public class User implements UserDetails {
 	}
 
 	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean isEnabled() {	
+		return emailVerified.isBefore(LocalDateTime.now());
 	}
 
 	public String getRole() {
