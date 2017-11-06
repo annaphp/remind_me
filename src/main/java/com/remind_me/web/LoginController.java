@@ -65,7 +65,7 @@ public class LoginController {
 				"Welcome to remindeme app", 
 				"Please follow this link: "
 				+ "http://45.77.115.43:8080/verifyEmail/"+user.getVerificationCode()
-				+ "this link will expire in 7 days.");
+				+ " this link will expire in 7 days.");
 		return "redirect:/login";
 	}
 }
