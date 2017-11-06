@@ -8,8 +8,8 @@
 			<fieldset>
 			
 			<label for="username"  class="control-label" >Username:</label>
-			<input type="text" name="username" class="form-control" th:field="*{username}" ></input>
-			<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger" role="alert"></p>
+			<input type="text" name="username" class="form-control" th:field="*{userName}" ></input>
+			<p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="alert alert-danger" role="alert"></p>
 			
 			<label for="email"  class="control-label">Email:</label>
 			<input type="email" name="email" class="form-control" th:field="*{email}"></input>

@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,8 +29,13 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@Size(min=4, max=255, message="Username must be at least 4 chars long.")
 	private String userName;
+	
+	@Size(min=8, max=512, message="Password must be at least 8 chars")
 	private String password;
+	
 	private String email;
 	private String role;
 	private LocalDateTime emailVerified = LocalDateTime.MAX;
