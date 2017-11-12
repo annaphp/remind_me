@@ -28,8 +28,6 @@ public class EmailServiceGmail implements EmailService {
 	private String password;
 	
 
-	
-
 	@Override
     @Async
 	public void send(String to, String subject, String text) {
