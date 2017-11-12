@@ -16,10 +16,7 @@ public class LocalDateAttributeConverter implements AttributeConverter<LocalDate
 	    }
 
 		@Override
-	    public LocalDate convertToEntityAttribute(Date sqlDate) {
-	    	
-			System.out.println(LocalDate.parse(sqlDate.toString()));
-			
+	    public LocalDate convertToEntityAttribute(Date sqlDate) {			
 	    	return (sqlDate == null ? null : sqlDate.toLocalDate());
 	    	
 	}

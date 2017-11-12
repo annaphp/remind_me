@@ -3,7 +3,6 @@ package remind_me;
 import java.time.LocalDate;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,15 +44,6 @@ public class EmailServiceTest {
 	    reminder2 = reminderService.save(reminder2, user);
 	}
 	
-//	@Test
-//	public void shouldSendEmail(){
-//		String to = "";
-//		String subject = "friendly Reminder";
-//		String text = "test";
-//		String email = "friendlyreminderrr@gmail.com";
-//		String password = "";
-//		emailService.send(to, subject, text, email, password);;
-//	}
-	
+
 	
 }

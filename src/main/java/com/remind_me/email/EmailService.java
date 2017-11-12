@@ -1,17 +1,10 @@
 package com.remind_me.email;
 
-import java.util.HashSet;
 import java.util.Properties;
-import java.util.Set;
 
-import javax.mail.BodyPart;
-import javax.mail.Flags;
-import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.Session;
-import javax.mail.Store;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -32,15 +25,12 @@ public class EmailService {
 	@Value("${password}")
 	private String password;
 	
-	
-
 	@Autowired
 	UserService userService;
 	
 
     @Async
 	public void send(String to, String subject, String text) {
-    	System.out.println("***email send method starts");
 		    Properties props = System.getProperties();
 		    props.put("mail.smtp.host", "smtp.gmail.com");
 		    props.put("mail.smtp.user", email);
