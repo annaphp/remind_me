@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import com.remind_me.core.email.EmailService;
-import com.remind_me.core.email.EmailServiceGmail;
 import com.remind_me.core.user.User;
 import com.remind_me.core.user.UserService;
 
