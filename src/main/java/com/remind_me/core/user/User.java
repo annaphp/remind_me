@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
@@ -35,7 +37,10 @@ public class User implements UserDetails {
 	private String password;
 	
 	private String email;
+	
+	@Enumerated(EnumType.STRING)
 	private Role role;
+	
 	private LocalDateTime emailVerified = LocalDateTime.MAX;
 	private String verificationCode;
 	private LocalDateTime createdDate;

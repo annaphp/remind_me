@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.remind_me.core.email.EmailService;
-import com.remind_me.core.email.EmailServiceGmail;
 import com.remind_me.core.user.Role;
 import com.remind_me.core.user.User;
 import com.remind_me.core.user.UserService;
