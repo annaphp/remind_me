@@ -27,8 +27,7 @@ public class EmailServiceGmail implements EmailService {
 	@Value("${password}")
 	private String password;
 	
-	@Autowired
-	UserService userService;
+
 	
 
 	@Override
