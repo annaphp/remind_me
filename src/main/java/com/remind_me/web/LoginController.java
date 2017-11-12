@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.remind_me.email.EmailService;
-import com.remind_me.user.User;
-import com.remind_me.user.UserService;
+import com.remind_me.core.email.EmailService;
+import com.remind_me.core.email.EmailServiceGmail;
+import com.remind_me.core.user.Role;
+import com.remind_me.core.user.User;
+import com.remind_me.core.user.UserService;
 
 @Controller
 public class LoginController {
@@ -59,7 +61,7 @@ public class LoginController {
 			return "register";
 		}
 
-		user = userService.create(user, "ROLE_OWNER"); // this method checks if user already exists
+		user = userService.create(user, Role.ROLE_USER); // this method checks if user already exists
 		model.addFlashAttribute("messages", "We send you an email, please follow a link in that email to verify your email address, please also check spam folder");
 		emailService.send(user.getEmail(), 
 				"Welcome to remindeme app", 

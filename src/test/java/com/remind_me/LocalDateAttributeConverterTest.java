@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.remind_me.core.formatters_converters.LocalDateAttributeConverter;
+
 public class LocalDateAttributeConverterTest {
 	
 	private LocalDateAttributeConverter converter;

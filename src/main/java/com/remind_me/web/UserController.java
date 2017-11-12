@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.remind_me.reminder.Category;
-import com.remind_me.reminder.Reminder;
-import com.remind_me.reminder.ReminderService;
-import com.remind_me.reminder.Status;
-import com.remind_me.user.User;
-import com.remind_me.user.UserService;
+import com.remind_me.core.reminder.Category;
+import com.remind_me.core.reminder.Reminder;
+import com.remind_me.core.reminder.ReminderService;
+import com.remind_me.core.reminder.Status;
+import com.remind_me.core.user.User;
+import com.remind_me.core.user.UserService;
 
 @Controller
 @RequestMapping("/user")

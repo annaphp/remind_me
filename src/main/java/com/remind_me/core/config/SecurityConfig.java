@@ -1,4 +1,4 @@
-package com.remind_me.config;
+package com.remind_me.core.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	    protected void configure(HttpSecurity http) throws Exception {
 	        http
 		        .authorizeRequests()// reverse order
-		        	.antMatchers("/user/**").hasRole("OWNER")
+		        	.antMatchers("/user/**").hasRole("USER")
 		            .antMatchers("/","/register").permitAll()
 		           	.and()
 	            .formLogin()

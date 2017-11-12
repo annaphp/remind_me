@@ -1,4 +1,4 @@
-package com.remind_me.user;
+package com.remind_me.core.user;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +23,7 @@ public class UserService implements UserDetailsService{
 	@Autowired
 	PasswordEncoder encoder;
 	
-	public User create(User user, String role){
+	public User create(User user, Role role){
 		if( ! usernameTaken(user)){
 			user.setRole(role);
 			user.setPassword(encoder.encode(user.getPassword()));

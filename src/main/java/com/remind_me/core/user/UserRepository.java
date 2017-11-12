@@ -1,4 +1,4 @@
-package com.remind_me.user;
+package com.remind_me.core.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

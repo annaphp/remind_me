@@ -1,4 +1,4 @@
-package com.remind_me.user;
+package com.remind_me.core.user;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class User implements UserDetails {
 	private String password;
 	
 	private String email;
-	private String role;
+	private Role role;
 	private LocalDateTime emailVerified = LocalDateTime.MAX;
 	private String verificationCode;
 	private LocalDateTime createdDate;
@@ -190,11 +190,13 @@ public class User implements UserDetails {
 		return emailVerified.isBefore(LocalDateTime.now());
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
-	}	
+	}
+
+		
 }

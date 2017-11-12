@@ -1,4 +1,4 @@
-package com.remind_me.reminder;
+package com.remind_me.core.reminder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,9 +10,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.remind_me.email.EmailService;
-import com.remind_me.user.User;
-import com.remind_me.user.UserService;
+import com.remind_me.core.email.EmailService;
+import com.remind_me.core.email.EmailServiceGmail;
+import com.remind_me.core.user.User;
+import com.remind_me.core.user.UserService;
 
 
 @Service

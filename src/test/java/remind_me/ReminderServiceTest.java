@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.remind_me.reminder.Reminder;
-import com.remind_me.reminder.ReminderService;
-import com.remind_me.user.User;
-import com.remind_me.user.UserService;
+import com.remind_me.core.reminder.Reminder;
+import com.remind_me.core.reminder.ReminderService;
+import com.remind_me.core.user.User;
+import com.remind_me.core.user.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=com.remind_me.RemindMeApplication.class)

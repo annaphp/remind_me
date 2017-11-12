@@ -1,4 +1,4 @@
-package com.remind_me.reminder;
+package com.remind_me.core.reminder;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.remind_me.user.User;
+import com.remind_me.core.user.User;
 
 public interface ReminderRepo extends JpaRepository<Reminder, Long>{
 	

@@ -1,4 +1,4 @@
-package com.remind_me.reminder;
+package com.remind_me.core.reminder;
 
 import java.time.LocalDate;
 
@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.remind_me.user.User;
+import com.remind_me.core.user.User;
 
 
 @Entity

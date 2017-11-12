@@ -1,4 +1,4 @@
-package com.remind_me.email;
+package com.remind_me.core.email;
 
 import java.util.Properties;
 
@@ -11,13 +11,15 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.remind_me.user.UserService;
+import com.remind_me.core.user.UserService;
 
+@Profile("prod")
 @Service
-public class EmailService {
+public class EmailServiceGmail implements EmailService {
 	
 	@Value("${email}")
 	private String email;
@@ -29,6 +31,7 @@ public class EmailService {
 	UserService userService;
 	
 
+	@Override
     @Async
 	public void send(String to, String subject, String text) {
 		    Properties props = System.getProperties();
