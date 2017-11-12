@@ -70,8 +70,7 @@ public class ReminderService {
 		   emailService.send(u.getEmail(), subject, r.getContent());
 		   //reminder is deleted after it's sent
 		   reminderRepo.delete(r);
-	   }
-		
+	   }	
 	}
 	
 	@Scheduled(fixedRate=Long.MAX_VALUE, initialDelay=300000)
