@@ -12,10 +12,6 @@ import com.remind_me.core.user.User;
 import com.remind_me.core.user.UserService;
 
 
-
-
-
-
 @Component
 @Profile({"dev"})
 public class TestUserSetup {

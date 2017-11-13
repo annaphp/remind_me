@@ -2,6 +2,8 @@ package com.remind_me.web;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ import com.remind_me.core.user.UserService;
 
 @Controller
 public class LoginController {
+	
+    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
 
 	@Autowired
 	UserService userService;
@@ -28,6 +33,7 @@ public class LoginController {
 
 	@GetMapping(path = { "/login", "/" })
 	public String loginForm(Model model) {
+		logger.info("login request");
 		return "login";
 	}
 
@@ -47,8 +53,7 @@ public class LoginController {
 	}
 
 	@PostMapping(value = "/register")
-	public String register(@Valid @ModelAttribute("userToRegister") User user, Errors errors,
-			RedirectAttributes model) {
+	public String register(@Valid @ModelAttribute("userToRegister") User user, Errors errors, RedirectAttributes model) {
 		if (errors.hasErrors()) {
 			model.addAttribute("userToRegister", user);
 			return "register";
